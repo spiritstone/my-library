@@ -3,8 +3,8 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
-  url      = "mysql://dev.db"
+  provider = "sqlite"
+  url      = "file:./dev.db"
 }
 
 model User {
@@ -23,14 +23,13 @@ model User {
 }
 
 model Book {
-  bookId      Int      @id @default(autoincrement())
-  bookName    String
+  bookId      Int      @id
   bookLabel   String
+  bookName    String
   writer      String
   publisher   String
-  category    Int
-  types       Int
-  ISBN        Int
+  category    String
+  types       String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
