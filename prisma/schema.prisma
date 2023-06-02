@@ -1,0 +1,51 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = "mysql://dev.db"
+}
+
+model User {
+  userId       Int      @id @default(autoincrement())
+  userName     String
+  rentCount    Int
+  rentLog      Int
+  reserveCount Int
+  lateCount    Int
+  lateFee      Int
+  paidStatus   Boolean
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  reservations Reservation[]
+}
+
+model Book {
+  bookId      Int      @id @default(autoincrement())
+  bookName    String
+  bookLabel   String
+  writer      String
+  publisher   String
+  category    Int
+  types       Int
+  ISBN        Int
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  reservations Reservation[]
+}
+
+model Reservation {
+  userId      Int      @id
+  bookId      Int      
+  rentDate    DateTime
+  returnDate  DateTime
+  status      Int
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user        User     @relation(fields: [userId], references: [userId])
+  book        Book     @relation(fields: [bookId], references: [bookId])
+}
