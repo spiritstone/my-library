@@ -1,11 +1,8 @@
-import React from 'react';
+export default function Books() {
 
-const BookList = () => {
-  return (
-    <div>
-      <h1>Book List</h1>
-    </div>
-  );
-};
-
-export default BookList;
+	return (
+		<div className="p-10">
+			<h1 className="text-3xl mb-4">Book List</h1>
+		</div>
+	)
+}

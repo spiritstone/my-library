@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { query } from '../../lib/db';
+import Link from 'next/link'
+// import { query } from 'lib.db';
 
 const Library = () => {
   const [books, setBooks] = useState([]);
@@ -22,6 +23,8 @@ const Library = () => {
   return (
     <div>
       <h1>Library Main Page</h1>
+
+      {/* 도서 리스트 */}
       <table>
         <thead>
           <tr>

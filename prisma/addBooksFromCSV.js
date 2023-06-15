@@ -1,19 +1,16 @@
-
-
 // addBooksFromCSV.js
 
-const csv = require('csv-parser');
-const fs = require('fs');
-const { PrismaClient } = require('@prisma/client');
+const csv = require("csv-parser");
+const fs = require("fs");
+const { PrismaClient } = require("@prisma/client");
 
 const prisma = new PrismaClient();
 
-
 let isFirstLine = true; // 첫 번째 줄인지 여부를 확인하기 위한 변수
 
-fs.createReadStream('books.csv')
+fs.createReadStream("books.csv")
   .pipe(csv())
-  .on('data', async (data) => {
+  .on("data", async (data) => {
     if (isFirstLine) {
       isFirstLine = false;
       return; // 첫 번째 줄은 건너뜁니다.
@@ -34,7 +31,7 @@ fs.createReadStream('books.csv')
         bookId,
         bookLabel,
         bookName,
-        writer,
+        author,
         publisher,
         category,
         types,
@@ -44,13 +41,12 @@ fs.createReadStream('books.csv')
     });
 
     await prisma.$transaction.commit(); // 변경 사항 커밋
-
   })
-  .on('end', () => {
-    console.log('CSV file successfully processed');
+  .on("end", () => {
+    console.log("CSV file successfully processed");
     process.exit(0);
   })
-  .on('error', (err) => {
+  .on("error", (err) => {
     console.error(err);
     process.exit(1);
   });
