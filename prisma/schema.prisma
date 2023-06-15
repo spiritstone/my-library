@@ -26,7 +26,7 @@ model Book {
   bookId      Int      @id
   bookLabel   String
   bookName    String
-  writer      String
+  author      String
   publisher   String
   category    String
   types       String

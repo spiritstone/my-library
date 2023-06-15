@@ -1,38 +1,18 @@
-// 도서 데이터 반환하는 api
+// Next.js API 경로
+import { PrismaClient } from "@prisma/client";
 
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import 'text-encoding-utf-8';
+const prisma = new PrismaClient();
 
-
-function Books() {
-  const [bookList, setBookList] = useState([]);
-
-  useEffect(() => {
-    async function fetchBooks() {
-      try {
-        const response = await axios.get('/api/books');
-        setBookList(response.data);
-      } catch (error) {
-        console.error('Error fetching books:', error);
-      }
+export default async function handler(req, res) {
+  if (req.method === "GET") {
+    try {
+      const books = await prisma.book.findMany();
+      res.status(200).json(books);
+    } catch (error) {
+      console.error("도서를 가져오는 중 오류 발생:", error);
+      res.status(500).json({ error: "도서를 가져오는 데 실패했습니다" });
     }
-
-    fetchBooks();
-  }, []);
-
-  return (
-    <div>
-      <h2>Books</h2>
-      <ul>
-        {bookList.map((book) => (
-          <li key={book.bookId}>
-            {book.bookId}: {book.bookName}
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
+  } else {
+    res.status(405).json({ error: "허용되지 않는 메서드입니다" });
+  }
 }
-
-export default Books;
