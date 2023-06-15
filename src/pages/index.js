@@ -135,7 +135,7 @@ export default function Home() {
               <tr key={book.bookId}>
                 <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">{book.category}</td>
                 <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                  <Link href={`/library/book/${book.bookId}`}>{book.bookName}</Link>
+                  <Link href={`/library/books/${book.bookId}`}>{book.bookName}</Link>
                 </td>
                 <td class="whitespace-nowrap px-4 py-2 text-gray-700">{book.author}</td>
                 <td class="whitespace-nowrap px-4 py-2 text-gray-700">{book.publisher}</td>
