@@ -1,12 +1,15 @@
 // Next.js API 경로
 import { PrismaClient } from '@prisma/client';
+import Link from 'next/link';
 
 const prisma = new PrismaClient();
 
 export default function Books({ books }) {
   return (
     <div className="p-10">
-      <h1 className="text-3xl mb-4">Book List</h1>
+      <div className="flex items-center mt-20 ml-16">
+        <h1 className="text-3xl font-bold text-center text-green-900">Book List</h1>
+      </div>
       <div className="flex items-center justify-center overflow-x-auto overflow-y-auto mt-12 mx-24">
         <table className="border border-1 border-black min-w-full divide-y-2 divide-gray-200 bg-white text-m h-96 ">
           <thead className="ltr:text-left rtl:text-right">
@@ -23,7 +26,9 @@ export default function Books({ books }) {
             {books.map(book => (
               <tr key={book.bookId}>
                 <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">{book.category}</td>
-                <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">{book.bookName}</td>
+                <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                  <Link href={`/library/book/${book.bookId}`}>{book.bookName}</Link>
+                </td>
                 <td class="whitespace-nowrap px-4 py-2 text-gray-700">{book.author}</td>
                 <td class="whitespace-nowrap px-4 py-2 text-gray-700">{book.publisher}</td>
               </tr>

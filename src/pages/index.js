@@ -1,9 +1,11 @@
-import Image from "next/image";
-import { Inter } from "next/font/google";
-import BookList from "/components/BookList.js";
-import React, { useEffect, useState } from "react";
+import Image from 'next/image';
+import { Inter } from 'next/font/google';
+// import Books from './library/books/index.js';
+import React, { useEffect, useState } from 'react';
+import Book from './library/books/[id]';
+import Link from 'next/link';
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ['latin'] });
 
 export default function Home() {
   const [books, setBooks] = useState([]);
@@ -12,15 +14,15 @@ export default function Home() {
     // 데이터베이스에서 도서 리스트를 가져오는 비동기 함수
     async function fetchBooks() {
       try {
-        const response = await fetch("/api/books");
+        const response = await fetch('/api/books');
         if (response.ok) {
           const booksData = await response.json();
           setBooks(booksData);
         } else {
-          console.error("도서를 가져오는 중 오류 발생:", response.status);
+          console.error('도서를 가져오는 중 오류 발생:', response.status);
         }
       } catch (error) {
-        console.error("도서를 가져오는 중 오류 발생:", error);
+        console.error('도서를 가져오는 중 오류 발생:', error);
       }
     }
 
@@ -35,8 +37,8 @@ export default function Home() {
       <div className="flex items-center justify-start flex-col">
         <div className="w-3/5 flex border border-1 border-black rounded-full mt-24 bg-green-100 ">
           <label class="sr-only" for="search">
-            {" "}
-            Search{" "}
+            {' '}
+            Search{' '}
           </label>
           <input
             id="search"
@@ -53,7 +55,8 @@ export default function Home() {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="w-6 h-6 text-gray-600">
+              className="w-6 h-6 text-gray-600"
+            >
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -68,7 +71,8 @@ export default function Home() {
         {/* // Left */}
         <a
           className="group relative inline-block overflow-hidden border border-green-900 px-14 py-8 focus:outline-none focus:ring w-56 h-24"
-          href="/ranking">
+          href="/ranking"
+        >
           <span className="absolute inset-y-0 left-0 w-[2px] bg-green-900 transition-all group-hover:w-full group-active:bg-green-600"></span>
 
           <span className="relative text-xl font-bold text-center text-green-900 transition-colors group-hover:text-white">
@@ -78,7 +82,8 @@ export default function Home() {
         {/* // Bottom */}
         <a
           className="group relative inline-block overflow-hidden border border-green-900 px-16 py-8 focus:outline-none focus:ring w-56 h-24"
-          href="/category/1">
+          href="/category/1"
+        >
           <span className="absolute inset-x-0 bottom-0 h-[2px] bg-green-900 transition-all group-hover:h-full group-active:bg-green-600"></span>
 
           <span className="relative text-xl font-bold text-center text-green-900 transition-colors group-hover:text-white">
@@ -88,7 +93,8 @@ export default function Home() {
         {/* // Right */}
         <a
           className="group relative inline-block overflow-hidden border border-green-900 px-16 py-8 focus:outline-none focus:ring w-56 h-24"
-          href="/category/2">
+          href="/category/2"
+        >
           <span className="absolute inset-y-0 right-0 w-[2px] bg-green-900 transition-all group-hover:w-full group-active:bg-green-600"></span>
 
           <span className="relative text-xl font-bold text-center text-green-900 transition-colors group-hover:text-white">
@@ -99,7 +105,8 @@ export default function Home() {
         {/* // Top */}
         <a
           className="group relative inline-block overflow-hidden border border-green-900 px-14 py-8 focus:outline-none focus:ring w-56 h-24"
-          href="/category/3">
+          href="/category/3"
+        >
           <span className="absolute inset-x-0 top-0 h-[2px] bg-green-900 transition-all group-hover:h-full group-active:bg-green-600"></span>
 
           <span className="relative text-xl font-bold text-center text-green-900 transition-colors group-hover:text-white">
@@ -108,49 +115,30 @@ export default function Home() {
         </a>
       </div>
       {/* // book list */}
-
       <div className="flex items-center mt-20 ml-16">
-        <h1 className="text-3xl font-bold text-center text-green-900">
-          Book List
-        </h1>
+        <h1 className="text-3xl font-bold text-center text-green-900">Book List</h1>
       </div>
       <div className="flex items-center justify-center overflow-x-auto overflow-y-auto mt-12 mx-24">
         <table className="border border-1 border-black min-w-full divide-y-2 divide-gray-200 bg-white text-m h-96 ">
           <thead className="ltr:text-left rtl:text-right">
             <tr>
-              <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-900">
-                카테고리
-              </th>
-              <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-900">
-                도서명
-              </th>
-              <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-900">
-                저자
-              </th>
-              <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-900">
-                출판사
-              </th>
-              <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-900">
-                대출 현황
-              </th>
+              <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-900">카테고리</th>
+              <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-900">도서명</th>
+              <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-900">저자</th>
+              <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-900">출판사</th>
+              <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-900">대출 현황</th>
               <th className="px-4 py-2"></th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
-            {books.map((book) => (
+            {books.map(book => (
               <tr key={book.bookId}>
+                <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">{book.category}</td>
                 <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                  {book.category}
+                  <Link href={`/library/book/${book.bookId}`}>{book.bookName}</Link>
                 </td>
-                <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                  {book.bookName}
-                </td>
-                <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-                  {book.author}
-                </td>
-                <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-                  {book.publisher}
-                </td>
+                <td class="whitespace-nowrap px-4 py-2 text-gray-700">{book.author}</td>
+                <td class="whitespace-nowrap px-4 py-2 text-gray-700">{book.publisher}</td>
               </tr>
             ))}
           </tbody>

@@ -1,8 +1,4 @@
-import { PrismaClient } from '@prisma/client';
 import React, { useState, useContext } from 'react';
-import rentAlert from './components/rentAlert.js';
-
-const prisma = new PrismaClient();
 
 export default function Book({ book }) {
   const [openAlert, setOpenAlert] = useState(false);
