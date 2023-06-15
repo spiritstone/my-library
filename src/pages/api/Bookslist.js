@@ -3,7 +3,7 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-function BooksList() {
+function BookList() {
   const [books, setBooks] = useState([]);
 
   useEffect(() => {
@@ -35,4 +35,4 @@ function BooksList() {
   );
 }
 
-export default BooksList;
+export default BookList;

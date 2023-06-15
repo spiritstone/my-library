@@ -57,8 +57,8 @@ export default function BookList() {
               <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
                 {book.title}
               </td>
-              <td>{book.writer}</td>
-              <td>{book.publicationYear}</td>
+              <td>{book.author}</td>
+              <td>{book.publisher}</td>
             </tr>
           ))}
         </tbody>

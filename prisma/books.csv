@@ -1,4 +1,4 @@
-bookId,bookLabel,bookName,writer,publisher,category,types
+bookId,bookLabel,bookName,author,publisher,category,types
 53001,연두A,인터넷 해킹과 보안 : 정보 보안 개론과 실습 (개정판),김경곤,한빛아카데미,Security,Security
 53002,연두B,정보보안개론 개정판 한 권으로 배우는 보안 이론의 모든 것,양대일,한빛아카데미,Security,Security
 53003,연두C,정보보안개론 (개정판) : 한 권으로 배우는 보안 이론의 모든 것,양대일,한빛아카데미,Security,Security

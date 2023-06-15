@@ -12,7 +12,7 @@ const Library = () => {
   const fetchBooks = async () => {
     try {
       const queryResult = await query(
-        'SELECT bookName, writer, publisher, category, status FROM books'
+        'SELECT bookName, author, publisher, category, status FROM books'
       );
       setBooks(queryResult);
     } catch (error) {
@@ -39,7 +39,7 @@ const Library = () => {
           {books.map((book, index) => (
             <tr key={index}>
               <td>{book.bookName}</td>
-              <td>{book.writer}</td>
+              <td>{book.author}</td>
               <td>{book.publisher}</td>
               <td>{book.category}</td>
               <td>{book.status}</td>

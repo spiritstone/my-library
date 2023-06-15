@@ -1,12 +1,16 @@
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router';
+import { useState } from 'react';
 
 export default function NewBook() {
   const router = useRouter();
+  const [bookName, setBookName] = useState('');
 
-  const createPost = async (event) => {
+  const handleSubmit = async event => {
     event.preventDefault();
 
-    const res = await fetch(`/api/library/books/new`, {
+    const response = await fetch(`/api/library/books/new`, {
+      method: 'POST',
+
       body: JSON.stringify({
         bookId: event.target.bookId.value,
         bookLabel: event.target.bookLabel.value,
@@ -16,35 +20,17 @@ export default function NewBook() {
         category: event.target.category.value,
         types: event.target.types.value,
       }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-      method: "POST",
     });
 
-    const handleSubmit = async (event) => {
-      event.preventDefault();
-
-      const response = await fetch("/api/boards", {
-        method: "POST",
-        body: JSON.stringify({
-          title,
-        }),
-      });
-
-      if (response.ok) {
-        router.push("/boards");
-      }
-    };
-
-    const result = await res.json();
-    router.push(`/library/books/`);
+    if (response.ok) {
+      router.push('/library/books/');
+    }
   };
 
   return (
     <div className="p-10">
       <h1 className="text-3xl mb-4">New Post</h1>
-      <form onSubmit={createPost} className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label className="block mb-1" htmlFor="bookId">
             bookId
@@ -54,7 +40,8 @@ export default function NewBook() {
             name="bookId"
             rows="1"
             className="w-full h-20 px-3 py-2 text-base placeholder-gray-600 border rounded-lg focus:shadow-outline"
-            required></textarea>
+            required
+          ></textarea>
           <label className="block mb-1" htmlFor="bookLabel">
             bookLabel
           </label>
@@ -63,7 +50,8 @@ export default function NewBook() {
             name="bookLabel"
             rows="1"
             className="w-full h-20 px-3 py-2 text-base placeholder-gray-600 border rounded-lg focus:shadow-outline"
-            required></textarea>
+            required
+          ></textarea>
 
           <label className="block mb-1" htmlFor="bookName">
             bookName
@@ -73,7 +61,8 @@ export default function NewBook() {
             name="bookName"
             rows="1"
             className="w-full h-20 px-3 py-2 text-base placeholder-gray-600 border rounded-lg focus:shadow-outline"
-            required></textarea>
+            required
+          ></textarea>
 
           <label className="block mb-1" htmlFor="author">
             author
@@ -83,7 +72,8 @@ export default function NewBook() {
             name="author"
             rows="1"
             className="w-full h-20 px-3 py-2 text-base placeholder-gray-600 border rounded-lg focus:shadow-outline"
-            required></textarea>
+            required
+          ></textarea>
 
           <label className="block mb-1" htmlFor="publisher">
             publisher
@@ -93,7 +83,8 @@ export default function NewBook() {
             name="publisher"
             rows="1"
             className="w-full h-20 px-3 py-2 text-base placeholder-gray-600 border rounded-lg focus:shadow-outline"
-            required></textarea>
+            required
+          ></textarea>
 
           <label className="block mb-1" htmlFor="category">
             category
@@ -103,7 +94,8 @@ export default function NewBook() {
             name="category"
             rows="1"
             className="w-full h-20 px-3 py-2 text-base placeholder-gray-600 border rounded-lg focus:shadow-outline"
-            required></textarea>
+            required
+          ></textarea>
 
           <label className="block mb-1" htmlFor="types">
             types
@@ -113,11 +105,10 @@ export default function NewBook() {
             name="types"
             rows="1"
             className="w-full h-20 px-3 py-2 text-base placeholder-gray-600 border rounded-lg focus:shadow-outline"
-            required></textarea>
+            required
+          ></textarea>
         </div>
-        <button
-          type="submit"
-          className="mt-6 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        <button type="submit" className="mt-6 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
           Create
         </button>
       </form>
